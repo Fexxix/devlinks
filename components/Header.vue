@@ -1,0 +1,27 @@
+<script setup lang="ts"></script>
+
+<template>
+  <div class="z-50 p-8 flex-initial">
+    <header
+      class="p-2 flex justify-between items-center bg-blackgray border border-white rounded-md"
+    >
+      <div class="flex gap-1 items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          class="fill-accent w-10 h-10"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.619 27.38c1.954 1.953 5.095 1.953 11.38 1.953 6.286 0 9.429 0 11.38-1.953 1.954-1.95 1.954-5.095 1.954-11.38 0-6.286 0-9.428-1.953-11.381C25.43 2.667 22.285 2.667 16 2.667c-6.286 0-9.428 0-11.381 1.952-1.952 1.954-1.952 5.095-1.952 11.38 0 6.286 0 9.429 1.952 11.38Zm8.047-15.713A4.333 4.333 0 1 0 17 16a1 1 0 0 1 2 0 6.333 6.333 0 1 1-6.334-6.334 1 1 0 1 1 0 2Zm11 4.333a4.333 4.333 0 0 1-4.333 4.333 1 1 0 1 0 0 2A6.333 6.333 0 1 0 13 16a1 1 0 1 0 2 0 4.334 4.334 0 0 1 8.666 0Z"
+          />
+        </svg>
+        <span class="text-2xl font-bold hidden md:block">devlinks</span>
+      </div>
+      <TabButtons />
+      <LinkActionButtons />
+    </header>
+  </div>
+</template>
