@@ -30,11 +30,23 @@ export function useUserData() {
 
   return {
     userData,
-    setUsername(name: string) {
-      userData.value.name = name
-    },
     removeLink(index: number) {
       userData.value.links.splice(index, 1)
     },
   }
+}
+
+type Errors = {
+  [key in keyof UserData]: key extends "links"
+    ? { message: string; index: number }[]
+    : { message: string }
+}
+
+export function useErrors() {
+  return useState<Errors>("errors", () => ({
+    name: { message: "" },
+    email: { message: "" },
+    imgURL: { message: "" },
+    links: [],
+  }))
 }

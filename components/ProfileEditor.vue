@@ -1,5 +1,8 @@
 <script setup lang="ts">
+const toast = useToast()
 const { userData } = useUserData()
+const errors = useErrors()
+const hasTouched = ref({ name: false, email: false })
 
 let pfpFileReader: FileReader
 
@@ -12,8 +15,7 @@ const handleFileChange = (e: Event) => {
   if (!file) return
 
   if (!isValidImageFile(file)) {
-    alert("Please select a valid image file.")
-    fileInput.value = ""
+    toast.add({ title: "Please select a valid image file." })
     return
   }
 
@@ -21,7 +23,7 @@ const handleFileChange = (e: Event) => {
 }
 
 const isValidImageFile = (file: File) => {
-  const allowedExtensions = ["jpg", "jpeg", "png", "gif"]
+  const allowedExtensions = ["jpg", "jpeg", "png"]
   const extension = file.name.split(".").pop()?.toLowerCase() || ""
   return allowedExtensions.includes(extension)
 }
@@ -31,6 +33,46 @@ onMounted(() => {
   pfpFileReader.onload = () =>
     (userData.value.imgURL = pfpFileReader.result as string)
 })
+
+function validateName() {
+  if (!hasTouched.value.name) return
+
+  if (!userData.value.name) {
+    errors.value.name.message = "Name cannot be blank"
+    return
+  }
+
+  if (userData.value.name.length < 3) {
+    errors.value.name.message = "Name must be at least 3 characters long"
+    return
+  }
+
+  errors.value.name.message = ""
+}
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function validateEmail() {
+  if (!hasTouched.value.email) return
+
+  if (!userData.value.email) {
+    errors.value.email.message = "Email cannot be blank"
+    return
+  }
+
+  if (!emailRegex.test(userData.value.email)) {
+    errors.value.email.message = "Invalid email format"
+    return
+  }
+
+  errors.value.email.message = ""
+}
+
+function handleFieldBlur(fieldName: keyof typeof hasTouched.value) {
+  hasTouched.value[fieldName] = true
+  if (fieldName == "name") validateName()
+  if (fieldName == "email") validateEmail()
+}
 </script>
 
 <template>
@@ -84,12 +126,17 @@ onMounted(() => {
               <UIcon class="w-5 h-5" name="i-heroicons-user-circle" />
             </div>
             <input
+              @blur="() => handleFieldBlur('name')"
+              @input="validateName"
               v-model="userData.name"
               class="p-2 bg-transparent flex-grow outline-none"
               type="text"
               placeholder="John Doe"
             />
           </div>
+        </div>
+        <div v-if="errors.name.message" class="text-red-600 text-sm">
+          {{ errors.name.message }}
         </div>
         <div class="flex gap-5 items-center">
           <label class="w-12" for="email">Email</label>
@@ -100,12 +147,17 @@ onMounted(() => {
               <UIcon class="w-5 h-5" name="i-heroicons-at-symbol" />
             </div>
             <input
+              @blur="() => handleFieldBlur('email')"
+              @input="validateEmail"
               v-model="userData.email"
               class="p-2 bg-transparent flex-grow outline-none"
               type="text"
               placeholder="your@email.com"
             />
           </div>
+        </div>
+        <div v-if="errors.email.message" class="text-red-600 text-sm">
+          {{ errors.email.message }}
         </div>
       </div>
     </div>
