@@ -17,7 +17,7 @@ function validateUserData() {
 
   // if (userData.)
 
-  const invalidLinkIndices = getInvalidLinks()
+  const invalidLinkIndices = getInvalidLinksIndices()
 
   if (invalidLinkIndices.length !== 0)
     toast.add({
@@ -26,7 +26,7 @@ function validateUserData() {
     })
 }
 
-function getInvalidLinks() {
+function getInvalidLinksIndices() {
   // Allow alphanumeric characters, hyphens, underscores, and dollar sign
   return userData.value.links
     .filter(({ userURL }) => !/^[a-zA-Z0-9_$-]+$/.test(userURL))

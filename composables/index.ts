@@ -38,7 +38,7 @@ export function useUserData() {
 
 type Errors = {
   [key in keyof UserData]: key extends "links"
-    ? { message: string; index: number }[]
+    ? Map<Platform["name"], { message: string }>
     : { message: string }
 }
 
@@ -47,6 +47,6 @@ export function useErrors() {
     name: { message: "" },
     email: { message: "" },
     imgURL: { message: "" },
-    links: [],
+    links: new Map(),
   }))
 }

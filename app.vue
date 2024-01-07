@@ -1,6 +1,19 @@
+<script setup lang="ts">
+useHead({
+  title: "devlinks",
+  link: [
+    {
+      rel: "icon",
+      type: "image/svg+xml",
+      href: "/icons/logo-devlinks-small.svg",
+    },
+  ],
+})
+</script>
+
 <template>
   <NuxtPage />
-  <UNotifications></UNotifications>
+  <UNotifications />
 </template>
 
 <style>

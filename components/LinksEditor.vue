@@ -1,22 +1,21 @@
 <script setup lang="ts">
 const platforms = [...PLATFORMS]
-const { userData } = useUserData()
+const { userData, removeLink } = useUserData()
 
 const selectedPlatforms = computed({
   get: () => userData.value.links.map((p) => p.platform),
   set: (selectedOptions: Platform[]): void => {
     if (selectedOptions.length === 0) {
-      userData.value.links = []
+      userData.value.links.length = 0
       return
     }
 
-    if (selectedPlatforms.value.includes(selectedOptions.at(-1)!)) {
-      userData.value.links = selectedOptions.map((p) => ({
-        platform: p,
-        userURL: userData.value.links.find((l) => l.platform.name === p.name)!
-          .userURL,
-      }))
-      return
+    if (selectedPlatforms.value.length > selectedOptions.length) {
+      const removedPlatform = getRemovedElement(
+        selectedPlatforms.value,
+        selectedOptions
+      )
+      return removeLink(selectedPlatforms.value.indexOf(removedPlatform))
     }
 
     userData.value.links.push({
@@ -55,6 +54,7 @@ onMounted(() => {
         placeholder="Add a Link"
         color="white"
         variant="outline"
+        name="links"
         size="lg"
       >
         <template #label

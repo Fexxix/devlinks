@@ -15,3 +15,11 @@ export function applyDrag<T>(arr: T[], dropResult: DropResult) {
 
   return arr
 }
+
+export function getRemovedElement<T>(arr1: T[], arr2: T[]) {
+  const set2 = new Set(arr2)
+
+  const element = arr1.filter((p) => !set2.has(p))[0]
+
+  return element
+}
