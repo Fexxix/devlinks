@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { userData } = useUserData()
 const toast = useToast()
+const errors = useErrors()
 
 function validateUserData() {
   if (isCompletelyBlank()) {
@@ -15,22 +16,34 @@ function validateUserData() {
     })
   }
 
-  // if (userData.)
-
-  const invalidLinkIndices = getInvalidLinksIndices()
-
-  if (invalidLinkIndices.length !== 0)
-    toast.add({
-      title: "Invalid links! Please remove invalid links before saving.",
-      icon: "i-heroicons-x-circle w-6 h-6 text-red-600",
+  if (userData.value.links.some((l) => l.userURL === "")) {
+    return toast.add({
+      title: "Please fill in the selected links",
     })
+  }
+
+  if (userData.value.email === "" || userData.value.name === "") {
+    return toast.add({
+      title: "Please fill profile details",
+    })
+  }
+
+  console.log(errors.value.links.size)
+
+  if (errorsExist()) {
+    return toast.add({
+      title: "Having trouble validating. Please fix all errors.",
+      icon: "i-heroicons-x-circle h-6 w-6 text-red-600",
+    })
+  }
 }
 
-function getInvalidLinksIndices() {
-  // Allow alphanumeric characters, hyphens, underscores, and dollar sign
-  return userData.value.links
-    .filter(({ userURL }) => !/^[a-zA-Z0-9_$-]+$/.test(userURL))
-    .map((_, i) => i)
+function errorsExist() {
+  return (
+    errors.value.name.message !== "" ||
+    errors.value.email.message !== "" ||
+    errors.value.links.size > 0
+  )
 }
 
 function isCompletelyBlank() {

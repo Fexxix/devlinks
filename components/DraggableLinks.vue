@@ -14,8 +14,6 @@ const hasTouched = ref<Record<Platform["name"], boolean>>(
 )
 
 function validateLink(platformName: Platform["name"], value: string) {
-  if (!hasTouched.value[platformName]) return
-
   if (!value || value.trim() === "") {
     return errors.value.links.set(platformName, { message: "Cannot be blank" })
   }
@@ -38,7 +36,10 @@ watchEffect(() => {
   const hasTouchedKeys = Object.keys(hasTouched.value)
 
   if (hasTouchedKeys.length < userData.value.links.length) {
-    hasTouched.value[userData.value.links.at(-1)!.platform.name] = false
+    const addedPlatformName = userData.value.links.at(-1)!.platform.name
+
+    hasTouched.value[addedPlatformName] = false
+    validateLink(addedPlatformName, "")
   }
   if (hasTouchedKeys.length > userData.value.links.length) {
     const removedPlatformName = getRemovedElement(
@@ -109,7 +110,8 @@ watchEffect(() => {
           <div
             class="text-red-600 text-sm p-2"
             :class="{
-              invisible: !errors.links.get(link.platform.name)?.message,
+              'invisible leading-none text-[0rem]':
+                !hasTouched[link.platform.name],
             }"
           >
             {{ errors.links.get(link.platform.name)?.message }}
