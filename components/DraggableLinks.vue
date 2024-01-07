@@ -110,7 +110,7 @@ watchEffect(() => {
           <div
             class="text-red-600 text-sm p-2"
             :class="{
-              'invisible leading-none text-[0rem]':
+              'invisible leading-none [font-size:0rem_!important]':
                 !hasTouched[link.platform.name],
             }"
           >
