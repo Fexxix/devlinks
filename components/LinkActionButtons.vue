@@ -28,8 +28,6 @@ function validateUserData() {
     })
   }
 
-  console.log(errors.value.links.size)
-
   if (errorsExist()) {
     return toast.add({
       title: "Having trouble validating. Please fix all errors.",
