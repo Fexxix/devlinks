@@ -1,4 +1,1 @@
-<template>
-  <Header />
-  <Editor />
-</template>
+<template></template>
