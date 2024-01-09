@@ -52,5 +52,11 @@ export default defineAppConfig({
         leaveToClass: "transform scale-95 opacity-0",
       },
     },
+    dropdown: {
+      background: "bg-black",
+      item: {
+        active: "bg-darkgray",
+      },
+    },
   },
 })

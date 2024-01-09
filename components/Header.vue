@@ -1,9 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { signOut } = useAuth()
+</script>
 
 <template>
   <div class="z-50 p-8 flex-initial">
     <header
-      class="p-2 flex justify-between items-center bg-blackgray border border-white rounded-md"
+      class="relative p-2 flex justify-between items-center bg-blackgray border border-white rounded-md"
     >
       <div class="flex gap-1 items-center">
         <svg
@@ -21,7 +23,27 @@
         <span class="text-2xl font-bold hidden md:block">devlinks</span>
       </div>
       <TabButtons />
-      <LinkActionButtons />
+      <div class="flex items-center gap-3">
+        <LinkActionButtons />
+        <UDropdown
+          :items="[
+            [
+              {
+                label: 'Signout',
+                icon: 'i-heroicons-arrow-left-end-on-rectangle',
+                iconClass: 'h-5 w-5',
+                click: () => signOut(),
+              },
+            ],
+          ]"
+        >
+          <button
+            class="flex items-center border border-accent rounded px-2 py-1 hover:bg-accent hover:shadow-accent hover:shadow-button transition-colors"
+          >
+            <UIcon name="i-heroicons-cog-6-tooth" class="h-6 w-6" />
+          </button>
+        </UDropdown>
+      </div>
     </header>
   </div>
 </template>

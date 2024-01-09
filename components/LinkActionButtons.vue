@@ -55,21 +55,19 @@ function isCompletelyBlank() {
 </script>
 
 <template>
-  <div class="flex gap-3">
-    <button
-      @click="validateUserData"
-      class="flex items-center gap-2 border border-accent py-1 px-2 rounded-md hover:bg-accent hover:shadow-accent hover:shadow-button transition-colors"
-    >
-      <UIcon name="i-heroicons-pencil-square" />
-      <span class="hidden md:block"> Save </span>
-    </button>
-    <button
-      class="flex items-center gap-2 border border-accent py-1 px-2 rounded-md hover:bg-accent hover:shadow-accent hover:shadow-button transition-colors"
-    >
-      <UIcon name="i-heroicons-arrow-top-right-on-square" />
-      <span class="hidden md:block">
-        /{{ userData.name.toLowerCase() || "username" }}
-      </span>
-    </button>
-  </div>
+  <button
+    @click="validateUserData"
+    class="flex items-center gap-2 border border-accent py-1 px-2 rounded-md hover:bg-accent hover:shadow-accent hover:shadow-button transition-colors"
+  >
+    <UIcon name="i-heroicons-pencil-square" />
+    <span class="hidden md:block"> Save </span>
+  </button>
+  <button
+    class="flex items-center gap-2 border border-accent py-1 px-2 rounded-md hover:bg-accent hover:shadow-accent hover:shadow-button transition-colors"
+  >
+    <UIcon name="i-heroicons-arrow-top-right-on-square" />
+    <span class="hidden md:block">
+      /{{ userData.name.toLowerCase() || "username" }}
+    </span>
+  </button>
 </template>
