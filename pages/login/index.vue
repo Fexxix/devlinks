@@ -7,8 +7,6 @@ definePageMeta({
 })
 
 const { signIn } = useAuth()
-
-// Webtoon Character Na Kang Lim
 </script>
 
 <template>
