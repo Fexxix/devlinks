@@ -27,7 +27,7 @@ const { signIn } = useAuth()
       </svg>
       <h1 class="text-5xl font-bold">devlinks</h1>
     </div>
-    <h2 class="text-4xl font-bold">
+    <h2 class="text-center text-2xl sm:text-3xl md:text-4xl font-bold">
       Login and share your profile with the world!
     </h2>
     <button
