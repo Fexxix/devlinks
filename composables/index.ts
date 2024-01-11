@@ -20,10 +20,12 @@ export function useCurrentTab() {
 }
 
 export function useUserData() {
+  const { data } = useAuth()
+
   const userData = useState<UserData>("userData", () => ({
-    name: "",
-    email: "",
-    imgURL: "",
+    name: data.value?.user?.name ?? "",
+    email: data.value?.user?.email ?? "",
+    imgURL: data.value?.user?.image ?? "",
     // "https://cdn.discordapp.com/attachments/805028085425635331/1186649351737581638/GAuy2Mza0AAMRJi.jpeg?ex=65940454&is=65818f54&hm=45a99ebd613b58fa0f4a37530927b8a9df527083ad109d97ee44c6fe7f4bf996&",
     links: [],
   }))
