@@ -25,9 +25,9 @@ definePageMeta({
       </svg>
       <h1 class="text-5xl font-bold">devlinks</h1>
     </div>
-    <h2 class="text-4xl font-bold">Share your profile with the World!</h2>
+    <h2 class="text-4xl font-bold">A link sharing app for devs.</h2>
     <NuxtLink
-      class="flex items-center gap-2 px-4 py-2 shadow-button shadow-accent border border-accent rounded-md hover:bg-accent transition-colors"
+      class="flex items-center gap-2 px-4 py-2 bg-blackgray shadow-button shadow-accent border border-accent rounded-md hover:bg-accent transition-colors"
       to="/login"
       >Get Started</NuxtLink
     >
