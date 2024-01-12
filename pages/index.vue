@@ -1,8 +1,14 @@
 <script setup lang="ts">
+const { getSession } = useAuth()
+
+const session = await getSession()
+
+console.log(session)
+
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,
-    navigateAuthenticatedTo: "/",
+    navigateAuthenticatedTo: "/editor",
   },
 })
 </script>
